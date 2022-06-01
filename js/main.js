@@ -4,24 +4,42 @@ const elStatus = document.querySelector('.status > span');
 
 const run = () => {
     const valueDoor = elDoor.value;
+    const valueSausage = elSausage.value;
 
-    if(valueDoor === 'close') {
-        elStatus.innerHTML = "The door is closed.Thank you.";
+    if(valueDoor === 'close' && valueSausage === 'take-out') {
+        let div = document.createElement('div');
+        div.innerHTML = "The door is closed. You cant get sausage.";
+        document.body.after(div);
+        setTimeout(() => div.remove(), 4000);
+        elStatus.innerHTML = 'The door is closed.';
         return;
     } 
-    if(valueDoor === 'open') {
+    
+
+    if(valueDoor === 'open' && valueSausage === 'take-out') {
+        let div = document.createElement('div');
+        div.innerHTML = "Enjoy your meal!!!";
+        document.body.after(div);
+        setTimeout(() => div.remove(), 4000);
         elStatus.innerHTML = "The door is opened. You can take the sausage.";
         return;
     }
     
-    const valueSausage = elSausage.value;
 
-    if(valueSausage ==='take-out') {
-        elStatus.innerHTML = "You took the sausage. Close the door please.";
+    if(valueSausage ==='put-back' && valueDoor === 'open') {
+        let div = document.createElement('div');
+        div.innerHTML = "Close the door please.";
+        document.body.after(div);
+        setTimeout(() => div.remove(), 4000);
+        elStatus.innerHTML = "You can put sausage back to fridge.";
         return;
     }
-    if(valueSausage ==='put-back') {
-        elStatus.innerHTML = "You put back the sausage. Close the door please.";
+    if( valueDoor === 'close' &&  valueSausage ==='put-back') {
+        let div = document.createElement('div');
+        div.innerHTML = "Open the door!!!";
+        document.body.after(div);
+        setTimeout(() => div.remove(), 4000);
+        elStatus.innerHTML = "You can not put sausage back to fridge. The door is closed.";
         return;
     }
 }
